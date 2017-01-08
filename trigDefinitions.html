@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script id="hide" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+	<script id="hide">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]},imageFont: null});</script>
+	<link rel="stylesheet" type="text/css" href="jsxgraph.css" />
+	<script id="inline" type="text/javascript" src="jsxgraphcore.js"></script>
+	<script src="https://cdn.jsdelivr.net/g/filesaver.js"></script> 
+	<script type="text/javascript" src="numeric.js"></script>
+    </head>
+    <body>
+    <div id="main" style="float:left;width:50%;">
+    <div id="content" style="height: 75%">
+    	<h3>Trigonometry Definitions</h3>
+        	<div id="main0">
+			<p>The word <i>sine</i> is derived from the Sanskrit word <i>jya</i> meaning <i>bowstring</i>.
+			</p>
+			<p>
+			In the picture on the right the <i>bow</i> is marked in black and the <i>bowstring</i> is in green.
+			The circle has radius equal to $1$.
+			</p>
+			<p>
+			Move the red point a little to see how the bow and bowstring get bigger and smaller as you change the angle a.
+			</p>
+			</div>
+		<p id="main1" style="visibility: hidden;">
+			Today we use $sin(a)$ to denote the length in green that is half of a bowstring.
+		</p>
+		<p id="main2" style="visibility: hidden;">
+			The word <i>secant</i> is derived from the Latin word <i>secare</i> meaning <i>to cut</i>.
+			It is the line that is 'cut' by the angle $a$.
+			Move the red point to see how changing the angle cuts out a different line.
+		</p>
+		<p id="main3" style="visibility: hidden;">
+			The word <i>tangent</i> is derived from the Latin word <i>tangere</i> meaning <i>to touch</i>.
+			It is the line 'just touching' the circle at $(1,0)$.
+			Notice that the tangent line doesn't change when you change the angle but its intersection with the secant line does.
+		</p>
+		<p id="main4" style="visibility: hidden;">
+			The tangent line and the secant line form another (larger) triangle.
+			Today we use $tan(a)$ to denote the height of this triangle and $sec(a)$ to denote the length of its hypotenuse.
+		</p>
+        </div>
+    </div>
+	<div style="float:left;width:50%">
+		<div id="buttons" style="height: 75px">
+	    	<button style="width:49%;height: 90%" onclick="nextStep(-1);">Back</button>
+	   		<button style="width:49%;height: 90%" onclick="nextStep(+1);">Next</button>
+        </div>
+	    <div  id="box" class="jxgbox" style="width:100%; height:400px;"></div>
+	</div>
+	<button style="visibility: hidden;" onClick="export2SVG();" >Export to SVG</button>
+	<script id="inline" type="text/javascript" src="trigDefinitions.js"></script>
+    </body>
+</html>
