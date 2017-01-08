@@ -1,6 +1,6 @@
 {
   "name": "maths-inliner",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Inlines MathJax, selected scripts and images.",
   "main": "minliner.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "url": "https://github.com/mwpb/maths-inliner/issues"
   },
   "homepage": "https://github.com/mwpb/maths-inliner#readme",
-  "bin":{
-  	"minliner":"./minliner.js"
+  "bin": {
+    "minliner": "./minliner.js"
   }
 }
