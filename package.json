@@ -1,0 +1,26 @@
+{
+  "name": "maths-inliner",
+  "version": "0.0.1",
+  "description": "Inlines MathJax, selected scripts and images.",
+  "main": "minliner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwpb/maths-inliner.git"
+  },
+  "keywords": [
+    "mathjax",
+    "inline",
+    "svg",
+    "images",
+    "scripts"
+  ],
+  "author": "Matthew Burke <matthewpatrickburke@gmail.com> (http://www.mwpb.uk)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwpb/maths-inliner/issues"
+  },
+  "homepage": "https://github.com/mwpb/maths-inliner#readme"
+}
