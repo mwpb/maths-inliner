@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/mwpb/maths-inliner/issues"
   },
-  "homepage": "https://github.com/mwpb/maths-inliner#readme"
+  "homepage": "https://github.com/mwpb/maths-inliner#readme",
+  "bin":{
+  	"minliner":"./minliner.js"
+  }
 }

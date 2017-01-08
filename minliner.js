@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var htmlparser = require("htmlparser2");
 var cheerio = require('cheerio');
 var fs = require('fs');
