@@ -1,11 +1,22 @@
 #!/usr/bin/env node
-var htmlparser = require("htmlparser2");
+// var htmlparser = require("htmlparser2");
 var cheerio = require('cheerio');
 var fs = require('fs');
 var tex2svg = require( 'tex-equation-to-svg' );
 
 var inputFilePath = process.argv[2];
 var outputFilePath = process.argv[3];
+var texFlag = process.argv[4];
+var texEnabled = true;
+
+if (texFlag != 'n') {
+	texEnabled = true;
+	console.log("tex enabled");
+}
+else {
+	texEnabled = false;
+	console.log("tex diabled");
+}
 
 function getSVGPromise(tex) {
     return new Promise(
@@ -160,34 +171,35 @@ inlinedStringPromise.then(fileString => {
 	var hideList = getHideScripts(outFile[0]);
 	outFile[0] = hideScripts(outFile[0],hideList);
 
-	var inlineMathsList = getInlineMaths(outFile[0]);
-	var inlineSVGPromiseList = inlineMathsList.map(function(tex){
-		var trimmedTex = tex.substring(1,tex.length-1);
-		return getSVGPromise(trimmedTex);
-	});
+	if (texEnabled) {
+		var inlineMathsList = getInlineMaths(outFile[0]);
+		var inlineSVGPromiseList = inlineMathsList.map(function(tex){
+			var trimmedTex = tex.substring(1,tex.length-1);
+			return getSVGPromise(trimmedTex);
+		});
 
-	var displayMathsList = getDisplayMaths(outFile[0]);
-	var displaySVGPromiseList = displayMathsList.map(function(tex){
-		var trimmedTex = tex.substring(2,tex.length-2);
-		return getSVGPromise(trimmedTex);
-	});
+		var displayMathsList = getDisplayMaths(outFile[0]);
+		var displaySVGPromiseList = displayMathsList.map(function(tex){
+			var trimmedTex = tex.substring(2,tex.length-2);
+			return getSVGPromise(trimmedTex);
+		});	
 
-	Promise.all(inlineSVGPromiseList).then(inlineSVGList=>{
+		Promise.all(inlineSVGPromiseList).then(inlineSVGList=>{
+		Promise.all(displaySVGPromiseList).then(displaySVGList=>{
+			console.log(inlineMathsList);
+			console.log(displayMathsList);
+			outFile[0] = replaceList(outFile[0],displayMathsList,displaySVGList,"<p style='text-align:center'>","</p>");
+			outFile[0] = replaceList(outFile[0],inlineMathsList,inlineSVGList," "," ");
+		});
+	});
+	}
 	Promise.all(srcFilePromiseList).then(srcFileList=>{
 	Promise.all(imgSrcFilePromiseList).then(imgSrcFileList=>{
-	Promise.all(displaySVGPromiseList).then(displaySVGList=>{
-		console.log(inlineMathsList);
-		console.log(displayMathsList);
-		// console.log(imgSrcFileList);
-		outFile[0] = replaceList(outFile[0],displayMathsList,displaySVGList,"<p style='text-align:center'>","</p>");
-		outFile[0] = replaceList(outFile[0],inlineMathsList,inlineSVGList," "," ");
-		outFile[0] = replaceList(outFile[0],imgList,imgSrcFileList," "," ");
 
+		outFile[0] = replaceList(outFile[0],imgList,imgSrcFileList," "," ");
 		outFile[0] = replaceScripts(outFile[0],scriptList,srcFileList);
-		// console.log(outFile[0]);
+		
 		fs.writeFile(outputFilePath,outFile[0]);
-	});
-	});
 	});
 	});
 });
