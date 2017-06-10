@@ -163,9 +163,12 @@ inlinedStringPromise.then(fileString => {
 	var outFile = [fileString];
 
 	var [srcList, scriptList] = getInlineScripts(outFile[0]);
+
 	var srcFilePromiseList = srcList.map(function(src){return getFilePromise(src);});
 
 	var [imgSrcList, imgList] = getInlineImgs(outFile[0]);
+	console.log("img list = "+imgList);
+	console.log("img src list = "+imgSrcList);
 	var imgSrcFilePromiseList = imgSrcList.map(function(src){return getFilePromise(src);});
 
 	var hideList = getHideScripts(outFile[0]);
@@ -182,24 +185,28 @@ inlinedStringPromise.then(fileString => {
 		var displaySVGPromiseList = displayMathsList.map(function(tex){
 			var trimmedTex = tex.substring(2,tex.length-2);
 			return getSVGPromise(trimmedTex);
-		});	
-
-		Promise.all(inlineSVGPromiseList).then(inlineSVGList=>{
-		Promise.all(displaySVGPromiseList).then(displaySVGList=>{
-			console.log(inlineMathsList);
-			console.log(displayMathsList);
-			outFile[0] = replaceList(outFile[0],displayMathsList,displaySVGList,"<p style='text-align:center'>","</p>");
-			outFile[0] = replaceList(outFile[0],inlineMathsList,inlineSVGList," "," ");
 		});
-	});
 	}
 	Promise.all(srcFilePromiseList).then(srcFileList=>{
 	Promise.all(imgSrcFilePromiseList).then(imgSrcFileList=>{
+	Promise.all(inlineSVGPromiseList).then(inlineSVGList=>{
+	Promise.all(displaySVGPromiseList).then(displaySVGList=>{
+		if (texEnabled) {
+			
+			console.log("img list = "+imgSrcFileList);
+			console.log(inlineMathsList);
+			console.log(displayMathsList);
+
+			outFile[0] = replaceList(outFile[0],displayMathsList,displaySVGList,"<p style='text-align:center'>","</p>");
+			outFile[0] = replaceList(outFile[0],inlineMathsList,inlineSVGList," "," ");
+		}
 
 		outFile[0] = replaceList(outFile[0],imgList,imgSrcFileList," "," ");
 		outFile[0] = replaceScripts(outFile[0],scriptList,srcFileList);
 		
 		fs.writeFile(outputFilePath,outFile[0]);
+	});
+	});
 	});
 	});
 });
