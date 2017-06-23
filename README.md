@@ -26,7 +26,7 @@ minliner infile.html outfile.html
 ## Implementation
 
 Uses regex to locate inline and display mathematics.
-Uses tex2svg to replace them with 
+Uses tex2svg to replace them with SVG code.
 Uses Promises for everything async.
 
 
