@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- <link rel="stylesheet" type="text/css" href="stylesheet.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="jsxgraph.css" /> -->
+	<script id="hide" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+ 	<script id="hide">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]},imageFont: null});</script>
+	<script id="inline" type="text/javascript" src="jsxgraphcore.js"></script>
+	<style type="text/css">
+		.circle {
+			border-radius: 50%;
+			display: inline;
+			color: white;
+			border: 0;
+			background: #962D3E;
+			width: 100px;
+			height: 100px;
+			box-shadow: 0 5px 5px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		}
+		.display-text {
+			text-align: center;
+			margin-left: 80px;
+			margin-right: 80px;
+			position: relative;
+		}
+	</style>
+    </head>
+    <body style="max-width: 800px;margin:auto;text-align:justify;">
+	<div class="display-text" style="height: 150px">
+        <div style="position: absolute; bottom: 0;">
+        <div id="main0">
+			<p><em>The minimum inscribed triangle when one vertex is fixed.</em></p>
+        	We want to find the minimum inscribed triangle of the fixed large black triangle that passes through the fixed point $F$.
+        	At the moment the red points $D$ and $E$ are arbitrary: they constitute a <i>positio falsa</i> which we want to analyse and then improve.
+        </div>
+        <p id="main1">
+        	The perimeter of the inscribed triangle is given by the sum of the lengths of the red, orange and yellow lines.
+        	The numerical value of the perimeter is displyed below the triangle.
+        	Move the red points to see how the perimeter changes and the inner triangle changes.
+        </p>
+        <p id="main2">
+        	The point $F'$ is the reflection of the point $F$ in the line $AB$ and the point $F''$ is the reflection of the point $F$ in the line $BC$.
+        	Therefore the length of $DF'$ is equal to the length of $DF$ and the length of $EF''$ is equal to the length of $EF$.
+        	Note that $F'$ and $F''$ are fixed with $F$.
+        </p>
+        <p id="main3">
+        	Therefore the length of the perimeter is equal to the length of the path $F'DEF''$.
+        	But the shortest distance between two points is a straight line.
+        	So if we want the perimeter to be as short as possible then we should choose $D$ and $E$ so they lie on the line $F'F''$.
+        	By moving the red points confirm that the perimeter is minimised when $D$ and $E$ both lie on $F'F''$.
+        </p>
+        </div>
+    </div>
+	<ul>
+    	<li style="display: inline-block;"><button class="circle" onclick="increment(-1)">Previous</button></li>
+    	<li style="display: inline-block;border: 1px solid black"><div  id="box" style="width: 400px; height:400px;"></li>
+    	<li style="display: inline-block;"><button class="circle" onclick="increment(1)">Next</button></li>
+    	<!-- <li><button class="circle" onclick="increment(-1)">Previous</button></li> -->
+    	<!-- <li><div  id="box" style="display: inline;width: 200px; height:400px;"></</div> -->
+    	<!-- <li><button class="circle" onclick="increment(1)">Next</button></li> -->
+    </ul>
+	<script id="inline" type="text/javascript" src="inscribed2.js"></script>
+    </body>
+</html>

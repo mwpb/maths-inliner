@@ -1,6 +1,6 @@
 {
   "name": "maths-inliner",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "description": "Inlines MathJax, selected scripts and images.",
   "main": "minliner.js",
   "scripts": {
@@ -17,8 +17,13 @@
     "images",
     "scripts"
   ],
+  "dependencies": {
+    "cheerio": "latest",
+    "fs":"latest",
+    "tex-equation-to-svg":"latest"
+  },
   "author": "Matthew Burke <matthewpatrickburke@gmail.com> (http://www.mwpb.uk)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mwpb/maths-inliner/issues"
   },
