@@ -4,15 +4,15 @@ Finds all MathJax inline and display formulas in an html file and replaces them 
 
 Useful when you want to display mathematics fast and/or when using an embedded webview (e.g. Xamarin HybridWebView).
 
-Allows the user to specify certain script tags (using the id="inline") to inline these scripts.
-Similarly the attribute id="inline" will inline images.
+Allows the user to specify certain script tags (using the class="inline") to inline these scripts.
+Similarly the attribute class="inline" will inline images.
 (Tested only with SVG images at present.)
 
 ## Prerequistes
 
 * cheerio
 * fs
-* tex2svg
+* mathjax-node
 
 ## Installation
 
@@ -35,12 +35,17 @@ It requires 2 arguments: the infile and the outfile.
 minliner infile.html outfile.html
 ```
 
-In `infile.html` decorate the scripts 
+In `infile.html` decorate the scripts and SVG images you would like to inline with `class="inline"` and those you would like to ignore with `class="hide"`.
+(For instance if you have scripts calling MathJax it is best to hide these as the inliner doesn't use them.)
+
+## Example
+
+There is an example showing basic usage [here](test/inscribed.html).
 
 ## Implementation
 
 Uses regex to locate inline and display mathematics.
-Uses tex2svg to replace them with SVG code.
+Now uses mathjax-node to replace them with SVG code.
 Uses Promises for everything async.
 
 ## License

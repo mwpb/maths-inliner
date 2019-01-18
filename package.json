@@ -1,6 +1,6 @@
 {
   "name": "maths-inliner",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Inlines MathJax, selected scripts and images.",
   "main": "minliner.js",
   "scripts": {
