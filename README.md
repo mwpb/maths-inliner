@@ -35,6 +35,8 @@ It requires 2 arguments: the infile and the outfile.
 minliner infile.html outfile.html
 ```
 
+In `infile.html` decorate the scripts 
+
 ## Implementation
 
 Uses regex to locate inline and display mathematics.

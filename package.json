@@ -19,8 +19,8 @@
   ],
   "dependencies": {
     "cheerio": "latest",
-    "fs":"latest",
-    "tex-equation-to-svg":"latest"
+    "fs": "latest",
+    "mathjax-node": "^2.1.1"
   },
   "author": "Matthew Burke <matthewpatrickburke@gmail.com> (http://www.mwpb.uk)",
   "license": "MIT",

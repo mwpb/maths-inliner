@@ -1,8 +1,7 @@
 #!/usr/bin/env node
-// var htmlparser = require("htmlparser2");
 var cheerio = require('cheerio');
 var fs = require('fs');
-var tex2svg = require( 'tex-equation-to-svg' );
+var mjAPI = require("mathjax-node");
 
 var inputFilePath = process.argv[2];
 var outputFilePath = process.argv[3];
@@ -18,15 +17,27 @@ else {
 	console.log("tex diabled");
 }
 
+mjAPI.config({
+  MathJax: {
+    // traditional MathJax configuration
+  }
+});
+mjAPI.start();
+
 function getSVGPromise(tex) {
     return new Promise(
 	function(resolve,reject){
-	    tex2svg(tex,function(error,svg){
-		if (error) { throw error;}
-		else {resolve(svg);}
-	    }
-		   )
-	}
+		mjAPI.typeset({
+			math: tex,
+			format: "TeX",
+			svg:true,
+			}, function (data) {
+			if (data.errors) {
+				reject(data.errors)
+			}
+			else {resolve(data.svg)}
+			});
+		}
     )
 };
 
@@ -76,7 +87,7 @@ function getInlineScripts(html){
 	var $ = cheerio.load(html);
 	var scriptList = [];
 	var srcList = []
-	$('script[id="inline"]').each(
+	$('script[class="inline"]').each(
 		function(index,element){
 			var source = $(element).attr('src');
 			var scriptString = $.html(element);
@@ -91,7 +102,7 @@ function getInlineImgs(html){
 	var $ = cheerio.load(html);
 	var scriptList = [];
 	var srcList = []
-	$('img[id="inline"]').each(
+	$('img[class="inline"]').each(
 		function(index,element){
 			var source = $(element).attr('src');
 			var scriptString = $.html(element);
@@ -105,7 +116,7 @@ function getInlineImgs(html){
 function getHideScripts(html){
 	var $ = cheerio.load(html);
 	var scriptList = [];
-	$('script[id="hide"]').each(
+	$('script[class="hide"]').each(
 		function(index,element){
 			var scriptString = $.html(element);
 			scriptList.push(scriptString);
@@ -116,7 +127,7 @@ function getHideScripts(html){
 
 function hideScripts(str,hideList) {
 	var outString = [str];
-	for (var i=0;i<hideList.length;i++){
+	for (var i=0;i<hideList.length;i++) {
 		var newString = outString[0].replace(hideList[i],"");
 		outString[0] = newString;
 	}
@@ -172,6 +183,7 @@ inlinedStringPromise.then(fileString => {
 	var imgSrcFilePromiseList = imgSrcList.map(function(src){return getFilePromise(src);});
 
 	var hideList = getHideScripts(outFile[0]);
+	console.log("hide list = "+hideList)
 	outFile[0] = hideScripts(outFile[0],hideList);
 
 	if (texEnabled) {
@@ -203,8 +215,9 @@ inlinedStringPromise.then(fileString => {
 
 		outFile[0] = replaceList(outFile[0],imgList,imgSrcFileList," "," ");
 		outFile[0] = replaceScripts(outFile[0],scriptList,srcFileList);
-		
-		fs.writeFile(outputFilePath,outFile[0]);
+		console.log(displaySVGList)
+		// console.log(outFile[0])
+		fs.writeFileSync(outputFilePath,outFile[0]);
 	});
 	});
 	});
