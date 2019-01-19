@@ -42,12 +42,6 @@ In `infile.html` decorate the scripts and SVG images you would like to inline wi
 
 There is an example showing basic usage [here](test/inscribed.html).
 
-## Implementation
-
-Uses regex to locate inline and display mathematics.
-Now uses mathjax-node to replace them with SVG code.
-Uses Promises for everything async.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
