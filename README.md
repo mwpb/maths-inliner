@@ -20,7 +20,7 @@ Similarly the attribute class="inline" will inline images.
 npm install maths-inliner
 ```
 
-of to install globally:
+or to install globally:
 
 ```
 npm install -g maths-inliner
